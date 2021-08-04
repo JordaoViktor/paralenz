@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -6,12 +6,16 @@ import Animated, {
   Extrapolate,
 } from 'react-native-reanimated';
 
+import {CharactersDTO} from '../../services/dtos/CharactersDTO';
+import {mock} from './mock';
 import {
   Container,
   ScrollViewWrapper,
   Header,
   HeaderImageWrapper,
   HeaderImage,
+  HeaderTitleWrapper,
+  HeaderTitle,
 } from './styles';
 
 import StarWarsLogo from '../../assets/starwars.png';
@@ -19,6 +23,8 @@ import StarWarsLogo from '../../assets/starwars.png';
 import {StatusBar} from '../../components/StatusBar';
 
 export const Home: React.FC = () => {
+  const [charactersList, setCharactersList] = useState<CharactersDTO[]>(mock);
+
   const statusBar = useSharedValue(0);
   const statusAnimation = useAnimatedStyle(() => ({
     height: interpolate(statusBar.value, [0, 50], [0, 50], Extrapolate.CLAMP),
@@ -41,9 +47,15 @@ export const Home: React.FC = () => {
         <HeaderImageWrapper>
           <HeaderImage source={StarWarsLogo} />
         </HeaderImageWrapper>
+
+        <HeaderTitleWrapper>
+          <HeaderTitle>Characters</HeaderTitle>
+        </HeaderTitleWrapper>
       </Header>
 
-      <ScrollViewWrapper onScroll={handleStatusBar} />
+      <ScrollViewWrapper onScroll={handleStatusBar}>
+        {/* <StarWarsCard data={charactersList} /> */}
+      </ScrollViewWrapper>
     </Container>
   );
 };

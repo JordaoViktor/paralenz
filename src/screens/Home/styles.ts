@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #1b1b1f;
+  background-color: ${({theme}) => theme.colors.background_primary};
 `;
 
 export const ScrollViewWrapper = styled.ScrollView.attrs({
@@ -16,7 +17,7 @@ export const ScrollViewWrapper = styled.ScrollView.attrs({
 
 export const Header = styled.View`
   width: 100%;
-  height: 250px;
+  height: 280px;
   background-color: ${({theme}) => theme.colors.shape_dark};
 `;
 
@@ -29,4 +30,17 @@ export const HeaderImageWrapper = styled.View`
 export const HeaderImage = styled.Image`
   width: 90%;
   height: 150px;
+`;
+
+export const HeaderTitleWrapper = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+export const HeaderTitle = styled.Text`
+  font-size: ${RFValue(30)}px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
 `;
