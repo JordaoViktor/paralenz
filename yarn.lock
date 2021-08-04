@@ -1903,6 +1903,14 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+avataaars@^1.2.1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/avataaars/-/avataaars-1.2.2.tgz#f3619075baa33610eeedb0677fc0f4fd0fe87990"
+  integrity sha512-cX12MRjt92hWKPff+hNHW7xZ4UAs/gcNN9gf/RSRs6VO1C4oEh6//jhF4JmboO40LZGZRJNS3b8G/9SNaptUpQ==
+  dependencies:
+    lodash ">=4.17.11"
+    prop-types "^15.6.0"
+
 axios@^0.21.1:
   version "0.21.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
@@ -3936,7 +3944,7 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
-lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.3.0:
+lodash@>=4.17.11, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.3.0:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -4873,6 +4881,19 @@ react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-native-avataaars@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-avataaars/-/react-native-avataaars-1.0.2.tgz#ab8d2d362ec097841982e4d56374a4c2b24e0ee5"
+  integrity sha512-XZWycD+9jHR/hBGtnMD7H3duaH3TYZUiMpIntERZZ91Hr5zAVJjSyJrxbE3vLKBQLyuAdmrge9gtVgb2nHSDRw==
+  dependencies:
+    avataaars "^1.2.1"
+    react-native-remote-svg "^1.4.0"
+
+react-native-remote-svg@^1.4.0:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-remote-svg/-/react-native-remote-svg-1.4.4.tgz#499c6ed68fee35995abf8762366b8e55a7196a85"
+  integrity sha512-8eS+wrjOKOqPPRYnSFZYHcHN/iywwAJrYKSwU8zdAuyYjwVW49S9Vtl3wTSpYqzGs8p16zkOXq7vMCClhHAZjA==
 
 react-native-safe-area-context@3.2.0:
   version "3.2.0"
