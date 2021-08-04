@@ -1598,6 +1598,19 @@
     query-string "^7.0.0"
     react-is "^16.13.0"
 
+"@react-navigation/elements@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.0.1.tgz#effcdb59aa5cf64445ff2ca7f50ee35df484fa72"
+  integrity sha512-KU6DPqmFmD4E+AwXOBzrqVBYG1Gd8HzPfbCk1PGzUjIiQOg6xv1pyfJ/d2x6aEOzxX5jtuNVCx6S553ZLkJP9Q==
+
+"@react-navigation/native-stack@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.0.1.tgz#78461817c64926819837f710196196cae1cda0e4"
+  integrity sha512-pj7lqLnS1dGonBYOLycwi+C+73EEjZdRbPueJX8RaiEF/LSZ3shLRqiBffPzpnM+y3NQqSWH5rYqnzH4W7kyhw==
+  dependencies:
+    "@react-navigation/elements" "^1.0.1"
+    warn-once "^0.1.0"
+
 "@react-navigation/native@^6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-6.0.1.tgz#1d8047b2b91b5adadb7f1d9b4f3499d9e16d36b3"
