@@ -1,12 +1,21 @@
 import React, {useCallback} from 'react';
-import {View} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
-import {Container, ScrollViewWrapper, Header} from './styles';
+
+import {
+  Container,
+  ScrollViewWrapper,
+  Header,
+  HeaderImageWrapper,
+  HeaderImage,
+} from './styles';
+
+import StarWarsLogo from '../../assets/starwars.png';
+
 import {StatusBar} from '../../components/StatusBar';
 
 export const Home: React.FC = () => {
@@ -21,12 +30,19 @@ export const Home: React.FC = () => {
     },
     [statusBar],
   );
+
   return (
     <Container>
       <Animated.View style={statusAnimation}>
         <StatusBar />
       </Animated.View>
-      <Header />
+
+      <Header>
+        <HeaderImageWrapper>
+          <HeaderImage source={StarWarsLogo} />
+        </HeaderImageWrapper>
+      </Header>
+
       <ScrollViewWrapper onScroll={handleStatusBar} />
     </Container>
   );
