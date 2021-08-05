@@ -2,7 +2,8 @@ import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import {useFetch} from '../../services/hooks/useFetch';
 import {useNavigation} from '@react-navigation/native';
-
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../routes/stack.routes';
 import {
   Container,
   CharactersListWrapper,
@@ -29,10 +30,12 @@ interface Props extends CharactersDTO {
   results: [];
 }
 
+type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+
 export const Home: React.FC = () => {
   const luke = 'people?ordering=name';
   const {data, isLoading} = useFetch<Props>(luke);
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenProp>();
 
   function handleCardPress(param: CharactersDTO) {
     navigation.navigate('CharacterDetail', param);
