@@ -1,18 +1,22 @@
 import styled from 'styled-components/native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {FlatList} from 'react-native';
+import {CharactersDTO} from '../../services/dtos/CharactersDTO';
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${({theme}) => theme.colors.background_primary};
 `;
 
-export const ScrollViewWrapper = styled.ScrollView.attrs({
-  scrollEventThrottle: 16,
-  contentContainerStyle: {
-    paddingTop: 40,
-    paddingBottom: 300,
-  },
-  showsVerticalScrollIndicator: false,
+export const CharactersListWrapper = styled(
+  FlatList as new () => FlatList<CharactersDTO>,
+).attrs({
+  // scrollEventThrottle: 16,
+  // contentContainerStyle: {
+  //   paddingTop: 40,
+  //   paddingBottom: 300,
+  // },
+  // showsVerticalScrollIndicator: false,
 })``;
 
 export const Header = styled.View`

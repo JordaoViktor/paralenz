@@ -1,16 +1,11 @@
-import React, {useCallback, useState} from 'react';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  interpolate,
-  Extrapolate,
-} from 'react-native-reanimated';
-
+import React from 'react';
+import {View} from 'react-native';
+import {useFetch} from '../../services/hooks/useFetch';
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
-import {mock} from './mock';
+import {useNavigation} from '@react-navigation/native';
 import {
   Container,
-  ScrollViewWrapper,
+  CharactersListWrapper,
   Header,
   HeaderImageWrapper,
   HeaderImage,
@@ -21,28 +16,47 @@ import {
 import StarWarsLogo from '../../assets/starwars.png';
 
 import {StatusBar} from '../../components/StatusBar';
+import Card from '../../components/Card';
+
+interface Props {
+  count: number;
+  next: string;
+  previous: null;
+  results: {
+    name: string;
+    height: string;
+    mass: string;
+    hair_color: string;
+    skin_color: string;
+    eye_color: string;
+    birth_year: string;
+    gender: string;
+    homeworld: string;
+    films: string[];
+    species: string[];
+    vehicles: string[];
+    starships: string[];
+    created: string;
+    edited: string;
+    url: string;
+  }[];
+}
 
 export const Home: React.FC = () => {
-  const [charactersList, setCharactersList] = useState<CharactersDTO[]>(mock);
+  const luke = 'people?ordering=name';
+  const {data, error, isLoading} = useFetch<Props>(luke);
+  const navigation = useNavigation();
+  // const [charactersList, setCharactersList] = useState<CharactersDTO[]>([data]);
+  // if (!data) {
+  //   <View style={{width: 300, height: 300, backgroundColor: 'red'}} />;
+  // }
 
-  const statusBar = useSharedValue(0);
-  const statusAnimation = useAnimatedStyle(() => ({
-    height: interpolate(statusBar.value, [0, 50], [0, 50], Extrapolate.CLAMP),
-  }));
-
-  const handleStatusBar = useCallback(
-    event => {
-      statusBar.value = event.nativeEvent.contentOffset.y;
-    },
-    [statusBar],
-  );
+  function handleCardPress(param: any) {
+    navigation.navigate('CharacterDetail', param);
+  }
 
   return (
     <Container>
-      <Animated.View style={statusAnimation}>
-        <StatusBar />
-      </Animated.View>
-
       <Header>
         <HeaderImageWrapper>
           <HeaderImage source={StarWarsLogo} />
@@ -53,9 +67,17 @@ export const Home: React.FC = () => {
         </HeaderTitleWrapper>
       </Header>
 
-      <ScrollViewWrapper onScroll={handleStatusBar}>
-        {/* <StarWarsCard data={charactersList} /> */}
-      </ScrollViewWrapper>
+      {isLoading ? (
+        <View style={{width: 300, height: 300, backgroundColor: 'green'}} />
+      ) : (
+        <CharactersListWrapper
+          data={data.results}
+          keyExtractor={(item, key) => String(key)}
+          renderItem={({item}) => (
+            <Card data={item} onPress={() => handleCardPress(item)} />
+          )}
+        />
+      )}
     </Container>
   );
 };
