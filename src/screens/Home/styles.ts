@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {FlatList} from 'react-native';
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
+import LottieView from 'lottie-react-native';
+import BabyYoda from '../../assets/animations/yoda-the-baby.json';
 
 export const Container = styled.View`
   flex: 1;
@@ -53,5 +55,16 @@ export const LoadingWrapper = styled.View`
   width: 100%;
   height: 100%;
   padding-top: 130px;
-  justify-content: flex-start;
+  align-items: center;
+`;
+
+export const BabyYodaAnimation = styled(LottieView).attrs({
+  loop: true,
+  autoPlay: true,
+  resizeMode: 'contain',
+  source: BabyYoda,
+})`
+  justify-content: center;
+  align-items: center;
+  height: 250px;
 `;

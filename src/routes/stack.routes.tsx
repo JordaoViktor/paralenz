@@ -1,17 +1,21 @@
 import React from 'react';
+import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+
 import {Home} from '../screens/Home';
 import {CharacterDetail} from '../screens/CharacterDetail';
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+import {Splash} from '../screens/Splash';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
 export type RootStackParamList = {
+  Splash: undefined;
   Home: undefined;
   CharacterDetail: undefined;
 };
 
 export const StackRoutes: React.FC = () => (
-  <Navigator screenOptions={{headerShown: false}} initialRouteName="Home">
+  <Navigator screenOptions={{headerShown: false}} initialRouteName="Splash">
+    <Screen name="Splash" component={Splash} />
     <Screen name="Home" component={Home} />
     <Screen name="CharacterDetail" component={CharacterDetail} />
   </Navigator>
