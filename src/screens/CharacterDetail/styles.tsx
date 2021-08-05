@@ -64,5 +64,4 @@ export const FooterFieldCharacterDetail = styled.Text`
   font-size: ${RFValue(28)}px;
   font-weight: bold;
   color: ${({theme}) => theme.colors.shape_dark};
-  /* padding-left: -50px; */
 `;

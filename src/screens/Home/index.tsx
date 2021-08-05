@@ -1,8 +1,8 @@
 import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import {useFetch} from '../../services/hooks/useFetch';
-import {CharactersDTO} from '../../services/dtos/CharactersDTO';
 import {useNavigation} from '@react-navigation/native';
+
 import {
   Container,
   CharactersListWrapper,
@@ -13,6 +13,8 @@ import {
   HeaderTitle,
   LoadingWrapper,
 } from './styles';
+
+import {CharactersDTO} from '../../services/dtos/CharactersDTO';
 
 import StarWarsLogo from '../../assets/starwars.png';
 
@@ -31,8 +33,7 @@ export const Home: React.FC = () => {
   const luke = 'people?ordering=name';
   const {data, isLoading} = useFetch<Props>(luke);
   const navigation = useNavigation();
-  // const [charactersList, setCharactersList] = useState<CharactersDTO[]>([data]);
-  console.log('heii:', data);
+
   function handleCardPress(param: CharactersDTO) {
     navigation.navigate('CharacterDetail', param);
   }
