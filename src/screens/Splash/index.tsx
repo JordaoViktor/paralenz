@@ -1,10 +1,14 @@
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../routes/stack.routes';
 
 import {Container, BB8Animation} from './styles';
 
+type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Splash'>;
+
 export const Splash: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenProp>();
 
   function handleNavigateHome() {
     navigation.navigate('Home');
@@ -12,7 +16,7 @@ export const Splash: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => handleNavigateHome(), 4000);
-  }, [handleNavigateHome]);
+  });
 
   return (
     <Container>

@@ -5,12 +5,14 @@ import {Home} from '../screens/Home';
 import {CharacterDetail} from '../screens/CharacterDetail';
 import {Splash} from '../screens/Splash';
 
+import {CharactersDTO} from '../services/dtos/CharactersDTO';
+
 const {Navigator, Screen} = createNativeStackNavigator();
 
 export type RootStackParamList = {
   Splash: undefined;
   Home: undefined;
-  CharacterDetail: undefined;
+  CharacterDetail: CharactersDTO;
 };
 
 export const StackRoutes: React.FC = () => (

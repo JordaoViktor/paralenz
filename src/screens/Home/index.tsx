@@ -36,7 +36,9 @@ type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export const Home: React.FC = () => {
   const query = 'people?ordering=name';
+
   const {data, error, isLoading} = useFetch<Props>(query);
+
   const navigation = useNavigation<HomeScreenProp>();
 
   function handleCardPress(param: CharactersDTO) {
@@ -67,7 +69,7 @@ export const Home: React.FC = () => {
             </View>
           ) : (
             <CharactersListWrapper
-              data={data.results}
+              data={data!.results}
               keyExtractor={(item, key) => String(key)}
               renderItem={({item}) => (
                 <Card character={item} onPress={() => handleCardPress(item)} />

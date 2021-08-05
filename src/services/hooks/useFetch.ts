@@ -1,42 +1,18 @@
 import {api} from '../api';
 import useSWR from 'swr';
 
-type SWRResponse<T> =
-  | {
-      isLoading: true;
-      data: undefined;
-      error: undefined;
-    }
-  | {
-      isLoading: false;
-      data: T;
-      error: undefined;
-    }
-  | {
-      isLoading: false;
-      data: undefined;
-      error: Error;
-    };
-
-export function useFetch<Data = any>(url: string): SWRResponse<Data> {
+export function useFetch<Data = any>(url: string) {
   const fetcher = () =>
     api
       .get(url)
-      .then((response: any) => response.data)
-      .catch((error: any) => console.log(error.message));
+      .then((res: any) => res.data)
+      .catch((err: any) => console.log(err.message));
 
   const {data, error} = useSWR<Data>(url, fetcher);
 
-  if (!data && !error) {
-    return {isLoading: true, data: undefined, error: undefined};
-  }
-  if (data) {
-    return {isLoading: false, data, error: undefined};
-  }
-
   return {
-    data: undefined,
-    error: new Error(error),
-    isLoading: false,
+    data,
+    error,
+    isLoading: !error && !data,
   };
 }
