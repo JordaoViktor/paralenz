@@ -1,4 +1,4 @@
-export interface HomeWorldDTO {
+export interface CharactersHomeWorldDTO {
   name: string;
   rotation_period: string;
   orbital_period: string;

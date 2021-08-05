@@ -5,7 +5,7 @@ import {CharactersDTO} from '../../services/dtos/CharactersDTO';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({theme}) => theme.colors.background_primary};
+  background-color: ${({theme}) => theme.colors.shape_dark};
 `;
 
 export const CharactersListWrapper = styled(
@@ -47,4 +47,11 @@ export const HeaderTitle = styled.Text`
   color: white;
   text-transform: uppercase;
   font-weight: bold;
+`;
+
+export const LoadingWrapper = styled.View`
+  width: 100%;
+  height: 100%;
+  padding-top: 130px;
+  justify-content: flex-start;
 `;

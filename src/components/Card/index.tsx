@@ -1,23 +1,39 @@
 import React, {memo} from 'react';
+import {ActivityIndicator} from 'react-native';
+import {useFetch} from '../../services/hooks/useFetch';
+
+import {Container, CardAlignment, CardTitle, CardField} from './styles';
+
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
-import {Container, CardWrapper, CardTitle} from './styles';
+import {CharactersHomeWorldDTO} from '../../services/dtos/CharactersHomeWorldDTO';
 
 interface Props {
-  data: CharactersDTO;
+  character: CharactersDTO;
   onPress: () => void;
 }
 
-function Card({data, onPress}: Props) {
-  // console.log('identify:', data);
+function Card({character, onPress}: Props) {
+  const characterWorld = character.homeworld;
+
+  const {data} = useFetch<CharactersHomeWorldDTO>(characterWorld);
 
   return (
     <Container onPress={onPress}>
-      <CardWrapper>
-        <CardTitle>{data.name}</CardTitle>
-      </CardWrapper>
-      <CardWrapper>
-        <CardTitle>{data.homeworld}</CardTitle>
-      </CardWrapper>
+      <CardAlignment>
+        <CardField>Name: </CardField>
+        <CardTitle>{character.name}</CardTitle>
+      </CardAlignment>
+
+      <CardAlignment>
+        {!data ? (
+          <ActivityIndicator style={{marginTop: 17}} size="large" />
+        ) : (
+          <>
+            <CardField>Home world: </CardField>
+            <CardTitle>{data.name}</CardTitle>
+          </>
+        )}
+      </CardAlignment>
     </Container>
   );
 }

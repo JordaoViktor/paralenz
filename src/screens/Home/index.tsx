@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import {useFetch} from '../../services/hooks/useFetch';
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
 import {useNavigation} from '@react-navigation/native';
@@ -11,47 +11,29 @@ import {
   HeaderImage,
   HeaderTitleWrapper,
   HeaderTitle,
+  LoadingWrapper,
 } from './styles';
 
 import StarWarsLogo from '../../assets/starwars.png';
 
-import {StatusBar} from '../../components/StatusBar';
 import Card from '../../components/Card';
 
-interface Props {
-  count: number;
-  next: string;
-  previous: null;
-  results: {
-    name: string;
-    height: string;
-    mass: string;
-    hair_color: string;
-    skin_color: string;
-    eye_color: string;
-    birth_year: string;
-    gender: string;
-    homeworld: string;
-    films: string[];
-    species: string[];
-    vehicles: string[];
-    starships: string[];
-    created: string;
-    edited: string;
-    url: string;
-  }[];
+interface Props extends CharactersDTO {
+  data: {
+    count: number;
+    next: string;
+    previous: null | string;
+  };
+  results: [];
 }
 
 export const Home: React.FC = () => {
   const luke = 'people?ordering=name';
-  const {data, error, isLoading} = useFetch<Props>(luke);
+  const {data, isLoading} = useFetch<Props>(luke);
   const navigation = useNavigation();
   // const [charactersList, setCharactersList] = useState<CharactersDTO[]>([data]);
-  // if (!data) {
-  //   <View style={{width: 300, height: 300, backgroundColor: 'red'}} />;
-  // }
-
-  function handleCardPress(param: any) {
+  console.log('heii:', data);
+  function handleCardPress(param: CharactersDTO) {
     navigation.navigate('CharacterDetail', param);
   }
 
@@ -68,13 +50,15 @@ export const Home: React.FC = () => {
       </Header>
 
       {isLoading ? (
-        <View style={{width: 300, height: 300, backgroundColor: 'green'}} />
+        <LoadingWrapper>
+          <ActivityIndicator size="large" />
+        </LoadingWrapper>
       ) : (
         <CharactersListWrapper
           data={data.results}
           keyExtractor={(item, key) => String(key)}
           renderItem={({item}) => (
-            <Card data={item} onPress={() => handleCardPress(item)} />
+            <Card character={item} onPress={() => handleCardPress(item)} />
           )}
         />
       )}
