@@ -1,7 +1,7 @@
 import React from 'react';
 import {useFetch} from '../../services/hooks/useFetch';
 import {useNavigation} from '@react-navigation/native';
-
+import {View, Text} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../routes/stack.routes';
 
@@ -36,7 +36,7 @@ type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export const Home: React.FC = () => {
   const query = 'people?ordering=name';
-  const {data, isLoading} = useFetch<Props>(query);
+  const {data, error, isLoading} = useFetch<Props>(query);
   const navigation = useNavigation<HomeScreenProp>();
 
   function handleCardPress(param: CharactersDTO) {
@@ -60,13 +60,21 @@ export const Home: React.FC = () => {
           <BabyYodaAnimation />
         </LoadingWrapper>
       ) : (
-        <CharactersListWrapper
-          data={data.results!}
-          keyExtractor={(item, key) => String(key)}
-          renderItem={({item}) => (
-            <Card character={item} onPress={() => handleCardPress(item)} />
+        <>
+          {error ? (
+            <View>
+              <Text>Hello error</Text>
+            </View>
+          ) : (
+            <CharactersListWrapper
+              data={data.results}
+              keyExtractor={(item, key) => String(key)}
+              renderItem={({item}) => (
+                <Card character={item} onPress={() => handleCardPress(item)} />
+              )}
+            />
           )}
-        />
+        </>
       )}
     </Container>
   );
