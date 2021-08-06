@@ -2,7 +2,13 @@ import React, {memo} from 'react';
 import {ActivityIndicator} from 'react-native';
 import {useFetch} from '../../services/hooks/useFetch';
 
-import {Container, CardAlignment, CardTitle, CardField} from './styles';
+import {
+  Container,
+  CardAlignment,
+  CardTitle,
+  CardField,
+  BabyYodaAnimation,
+} from './styles';
 
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
 import {CharactersHomeWorldDTO} from '../../services/dtos/CharactersHomeWorldDTO';
@@ -22,7 +28,6 @@ function Card({character, onPress}: Props) {
   );
 
   const characterHomeWorldName = userData?.result.properties.name;
-  console.log(characterHomeWorldName);
 
   return (
     <Container onPress={onPress}>
@@ -36,7 +41,8 @@ function Card({character, onPress}: Props) {
         {characterHomeWorldName ? (
           <CardTitle> {characterHomeWorldName}</CardTitle>
         ) : (
-          <ActivityIndicator style={{marginTop: 8}} size="large" />
+          <BabyYodaAnimation />
+          // <ActivityIndicator style={{marginTop: 8}} size="large" />
         )}
       </CardAlignment>
     </Container>

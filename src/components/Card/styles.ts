@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
 import {RectButton} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
+import LottieView from 'lottie-react-native';
+import BabyYoda from '../../assets/animations/yoda-the-baby.json';
 
 export const Container = styled(RectButton)`
-  height: 90px;
+  height: 100px;
   background-color: ${({theme}) => theme.colors.secondary_dark};
   margin: 10px;
   margin-top: 50px;
@@ -30,4 +32,14 @@ export const CardField = styled.Text`
 export const CardTitle = styled.Text`
   font-size: 20px;
   color: black;
+`;
+export const BabyYodaAnimation = styled(LottieView).attrs({
+  loop: true,
+  autoPlay: true,
+  resizeMode: 'contain',
+  source: BabyYoda,
+})`
+  justify-content: center;
+  align-items: center;
+  height: 50px;
 `;

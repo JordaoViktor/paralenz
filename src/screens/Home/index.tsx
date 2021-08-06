@@ -36,19 +36,15 @@ export const Home: React.FC = ({route}) => {
   const navigation = useNavigation<HomeScreenProp>();
   const paramsList = route.params.results;
 
-  const cardList = paramsList.slice(0);
-
-  const sortedByName = cardList.sort((a, b) => {
+  const sortedByName = paramsList.sort((a, b) => {
     const x = a.name.toLowerCase();
     const y = b.name.toLowerCase();
 
     return x < y ? -1 : x > y ? 1 : 0;
   });
 
-  const cardListFromArray = Array.from(sortedByName);
-
   const filterValues = (cardNumber: number) =>
-    cardListFromArray.filter((item, index) => {
+    sortedByName.filter((item, index) => {
       if (index <= cardNumber - 1) {
         return item;
       }
@@ -95,6 +91,8 @@ export const Home: React.FC = ({route}) => {
             <Card character={item} onPress={() => handleCardPress(item)} />
           )}
           onEndReached={() => handleScrollCard()}
+          scrollEventThrottle={16}
+          onEndReachedThreshold={0.5}
         />
       )}
     </Container>
