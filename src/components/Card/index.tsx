@@ -13,9 +13,16 @@ interface Props {
 }
 
 function Card({character, onPress}: Props) {
-  const characterWorld = character.homeworld;
+  const {data} = useFetch<CharactersHomeWorldDTO>(character.url);
 
-  const {data} = useFetch<CharactersHomeWorldDTO>(characterWorld);
+  const characterHomeWorldUrl = data?.result.properties.homeworld;
+
+  const {data: userData} = useFetch<CharactersHomeWorldDTO>(
+    characterHomeWorldUrl,
+  );
+
+  const characterHomeWorldName = userData?.result.properties.name;
+  console.log(characterHomeWorldName);
 
   return (
     <Container onPress={onPress}>
@@ -25,13 +32,11 @@ function Card({character, onPress}: Props) {
       </CardAlignment>
 
       <CardAlignment>
-        {!data ? (
-          <ActivityIndicator style={{marginTop: 17}} size="large" />
+        <CardField>Home World: </CardField>
+        {characterHomeWorldName ? (
+          <CardTitle> {characterHomeWorldName}</CardTitle>
         ) : (
-          <>
-            <CardField>Home world: </CardField>
-            <CardTitle>{data.name}</CardTitle>
-          </>
+          <ActivityIndicator style={{marginTop: 8}} size="large" />
         )}
       </CardAlignment>
     </Container>

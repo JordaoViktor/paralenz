@@ -1,7 +1,5 @@
-import React from 'react';
-import {useFetch} from '../../services/hooks/useFetch';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {View, Text} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../routes/stack.routes';
 
@@ -34,12 +32,40 @@ interface Props extends CharactersDTO {
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
-export const Home: React.FC = () => {
-  const query = 'people?ordering=name';
-
-  const {data, error, isLoading} = useFetch<Props>(query);
-
+export const Home: React.FC = ({route}) => {
   const navigation = useNavigation<HomeScreenProp>();
+  const paramsList = route.params.results;
+
+  const cardList = paramsList.slice(0);
+
+  const sortedByName = cardList.sort((a, b) => {
+    const x = a.name.toLowerCase();
+    const y = b.name.toLowerCase();
+
+    return x < y ? -1 : x > y ? 1 : 0;
+  });
+
+  const cardListFromArray = Array.from(sortedByName);
+
+  const filterValues = (cardNumber: number) =>
+    cardListFromArray.filter((item, index) => {
+      if (index <= cardNumber - 1) {
+        return item;
+      }
+    });
+
+  const filtered = filterValues(5);
+  const [charactersList, setCharactersList] = useState(filtered);
+
+  function handleScrollCard() {
+    const cardsPerScroll = 10;
+    const value = filterValues(charactersList.length + cardsPerScroll);
+
+    setCharactersList(prevState => [
+      ...prevState.filter(item => item === charactersList),
+      ...value,
+    ]);
+  }
 
   function handleCardPress(param: CharactersDTO) {
     navigation.navigate('CharacterDetail', param);
@@ -57,26 +83,19 @@ export const Home: React.FC = () => {
         </HeaderTitleWrapper>
       </Header>
 
-      {isLoading ? (
+      {!route.params.results ? (
         <LoadingWrapper>
           <BabyYodaAnimation />
         </LoadingWrapper>
       ) : (
-        <>
-          {error ? (
-            <View>
-              <Text>Hello error</Text>
-            </View>
-          ) : (
-            <CharactersListWrapper
-              data={data!.results}
-              keyExtractor={(item, key) => String(key)}
-              renderItem={({item}) => (
-                <Card character={item} onPress={() => handleCardPress(item)} />
-              )}
-            />
+        <CharactersListWrapper
+          data={charactersList}
+          keyExtractor={(item, key) => String(key)}
+          renderItem={({item}) => (
+            <Card character={item} onPress={() => handleCardPress(item)} />
           )}
-        </>
+          onEndReached={() => handleScrollCard()}
+        />
       )}
     </Container>
   );

@@ -27,7 +27,7 @@ export const CharacterDetail: React.FC = () => {
   const {params} = useRoute();
   const character = params as Params;
   const navigation = useNavigation();
-
+  console.log('params:', params);
   function handlePreviousPage() {
     navigation.goBack();
   }
