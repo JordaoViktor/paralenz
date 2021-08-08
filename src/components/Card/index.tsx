@@ -1,5 +1,4 @@
 import React, {memo} from 'react';
-import {ActivityIndicator} from 'react-native';
 import {useFetch} from '../../services/hooks/useFetch';
 
 import {
@@ -10,24 +9,23 @@ import {
   BabyYodaAnimation,
 } from './styles';
 
-import {CharactersDTO} from '../../services/dtos/CharactersDTO';
+import {CharactersListDTO} from '../../services/dtos/CharactersListDTO';
 import {CharactersHomeWorldDTO} from '../../services/dtos/CharactersHomeWorldDTO';
 
 interface Props {
-  character: CharactersDTO;
+  character: CharactersListDTO;
   onPress: () => void;
 }
 
 function Card({character, onPress}: Props) {
-  const {data} = useFetch<CharactersHomeWorldDTO>(character.url);
+  const {data: userData} = useFetch(character.url);
 
-  const characterHomeWorldUrl = data?.result.properties.homeworld;
+  const characterHomeWorldUrl = userData?.result.properties.homeworld;
 
-  const {data: userData} = useFetch<CharactersHomeWorldDTO>(
+  const {data: userInfo} = useFetch<CharactersHomeWorldDTO>(
     characterHomeWorldUrl,
   );
-
-  const characterHomeWorldName = userData?.result.properties.name;
+  const planet = userInfo?.result.properties.name;
 
   return (
     <Container onPress={onPress}>
@@ -38,12 +36,7 @@ function Card({character, onPress}: Props) {
 
       <CardAlignment>
         <CardField>Home World: </CardField>
-        {characterHomeWorldName ? (
-          <CardTitle> {characterHomeWorldName}</CardTitle>
-        ) : (
-          <BabyYodaAnimation />
-          // <ActivityIndicator style={{marginTop: 8}} size="large" />
-        )}
+        {planet ? <CardTitle>{planet}</CardTitle> : <BabyYodaAnimation />}
       </CardAlignment>
     </Container>
   );

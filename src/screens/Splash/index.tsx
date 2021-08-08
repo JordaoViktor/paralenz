@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useFetch} from '../../services/hooks/useFetch';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../routes/stack.routes';
-import {useFetch} from '../../services/hooks/useFetch';
 import {Container, BB8Animation} from './styles';
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Splash'>;

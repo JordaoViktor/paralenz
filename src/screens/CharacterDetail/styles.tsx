@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import LottieView from 'lottie-react-native';
+import BabyYoda from '../../assets/animations/yoda-the-baby.json';
 
 export const Container = styled.View`
   flex: 1;
@@ -64,4 +66,15 @@ export const FooterFieldCharacterDetail = styled.Text`
   font-size: ${RFValue(28)}px;
   font-weight: bold;
   color: ${({theme}) => theme.colors.shape_dark};
+`;
+
+export const BabyYodaAnimation = styled(LottieView).attrs({
+  loop: true,
+  autoPlay: true,
+  resizeMode: 'contain',
+  source: BabyYoda,
+})`
+  justify-content: center;
+  align-items: center;
+  height: 50px;
 `;

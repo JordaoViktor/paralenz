@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, ReactNode} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../routes/stack.routes';
@@ -15,28 +15,19 @@ import {
   BabyYodaAnimation,
 } from './styles';
 
+import {CharactersListDTO} from '../../services/dtos/CharactersListDTO';
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
-
 import StarWarsLogo from '../../assets/images/starwars.png';
 
 import Card from '../../components/Card';
 
-interface Props extends CharactersDTO {
-  data?: {
-    count: number;
-    next: string;
-    previous: null | string;
-  };
-  results?: [];
-}
-
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
-export const Home: React.FC = ({route}) => {
+export const Home: ReactNode = ({route}: any) => {
   const navigation = useNavigation<HomeScreenProp>();
   const paramsList = route.params.results;
 
-  const sortedByName = paramsList.sort((a, b) => {
+  const sortedByName = paramsList.sort((a: any, b: any) => {
     const x = a.name.toLowerCase();
     const y = b.name.toLowerCase();
 
@@ -44,26 +35,28 @@ export const Home: React.FC = ({route}) => {
   });
 
   const filterValues = (cardNumber: number) =>
-    sortedByName.filter((item, index) => {
+    sortedByName.filter((item: number, index: number) => {
       if (index <= cardNumber - 1) {
         return item;
       }
     });
 
   const filtered = filterValues(5);
-  const [charactersList, setCharactersList] = useState(filtered);
+
+  const [charactersList, setCharactersList] =
+    useState<CharactersListDTO[]>(filtered);
 
   function handleScrollCard() {
     const cardsPerScroll = 10;
     const value = filterValues(charactersList.length + cardsPerScroll);
 
     setCharactersList(prevState => [
-      ...prevState.filter(item => item === charactersList),
+      ...prevState.filter((item): boolean => item === charactersList),
       ...value,
     ]);
   }
 
-  function handleCardPress(param: CharactersDTO) {
+  function handleCardPress(param: CharactersDTO[]) {
     navigation.navigate('CharacterDetail', param);
   }
 

@@ -1,6 +1,8 @@
-import React from 'react';
-import {TouchableWithoutFeedback} from 'react-native';
+import React, {useContext, useEffect} from 'react';
 import {useRoute, useNavigation} from '@react-navigation/native';
+import {useFetch} from '../../services/hooks/useFetch';
+import {TouchableWithoutFeedback} from 'react-native';
+
 import {
   Container,
   Header,
@@ -13,25 +15,54 @@ import {
   FooterFieldWrapper,
   FooterFieldText,
   FooterFieldCharacterDetail,
+  BabyYodaAnimation,
 } from './styles';
 
+import {CharacterInformationContext} from '../../context/CharacterInformation';
+
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
+import {CharactersHomeWorldDTO} from '../../services/dtos/CharactersHomeWorldDTO';
 
 import {BigHead} from 'react-native-bigheads';
 
 interface Params extends CharactersDTO {
   params: () => void;
+  url: string;
+  name: string;
+}
+
+interface ContextProps {
+  setCharacterFullInfo: () => void;
+  characterFullInfo: CharactersDTO;
 }
 
 export const CharacterDetail: React.FC = () => {
   const {params} = useRoute();
   const character = params as Params;
   const navigation = useNavigation();
-  // console.log('params:', params);
+
+  const {data: userInfo} = useFetch<CharactersHomeWorldDTO>(character.url);
+  console.log('blink', userInfo);
+  const {setCharacterFullInfo, characterFullInfo} = useContext<ContextProps>(
+    CharacterInformationContext,
+  );
+
+  function SetContext() {
+    if (userInfo) {
+      setCharacterFullInfo(userInfo);
+    }
+  }
 
   function handlePreviousPage() {
     navigation.goBack();
   }
+
+  useEffect(() => {
+    SetContext();
+  });
+
+  const personage = characterFullInfo?.result?.properties;
+
   return (
     <TouchableWithoutFeedback onPress={() => handlePreviousPage()}>
       <Container>
@@ -55,28 +86,28 @@ export const CharacterDetail: React.FC = () => {
             <FooterFieldWrapper>
               <FooterFieldText>Gender: </FooterFieldText>
               <FooterFieldCharacterDetail>
-                {character.gender}
+                {personage ? personage?.gender : <BabyYodaAnimation />}
               </FooterFieldCharacterDetail>
             </FooterFieldWrapper>
 
             <FooterFieldWrapper>
               <FooterFieldText>Eye color: </FooterFieldText>
               <FooterFieldCharacterDetail>
-                {character.eye_color}
+                {personage ? personage?.eye_color : <BabyYodaAnimation />}
               </FooterFieldCharacterDetail>
             </FooterFieldWrapper>
 
             <FooterFieldWrapper>
               <FooterFieldText>Skin color: </FooterFieldText>
               <FooterFieldCharacterDetail>
-                {character.skin_color}
+                {personage ? personage?.skin_color : <BabyYodaAnimation />}
               </FooterFieldCharacterDetail>
             </FooterFieldWrapper>
 
             <FooterFieldWrapper>
               <FooterFieldText>Hair color: </FooterFieldText>
               <FooterFieldCharacterDetail>
-                {character.hair_color}
+                {personage ? personage?.hair_color : <BabyYodaAnimation />}
               </FooterFieldCharacterDetail>
             </FooterFieldWrapper>
           </FooterWrapper>

@@ -11,7 +11,7 @@ export const Container = styled.View`
 `;
 
 export const CharactersListWrapper = styled(
-  FlatList as new () => FlatList<CharactersDTO>,
+  FlatList as new () => FlatList<CharactersDTO[]>,
 ).attrs({
   // scrollEventThrottle: 16,
   // contentContainerStyle: {

@@ -1,16 +1,22 @@
 export interface CharactersHomeWorldDTO {
-  name: string;
-  rotation_period: string;
-  orbital_period: string;
-  diameter: string;
-  climate: string;
-  gravity: string;
-  terrain: string;
-  surface_water: string;
-  population: string;
-  residents: string[];
-  films: string[];
-  created: string;
-  edited: string;
-  url: string;
+  message: string;
+  result: {
+    __v: number;
+    _id: string;
+    description: string;
+    properties: {
+      climate: string;
+      created: string;
+      diameter: string;
+      edited: string;
+      gravity: string;
+      name: string;
+      orbital_period: string;
+      rotation_period: string;
+      population: string;
+      surface_water: string;
+      terrain: string;
+      url: string;
+    };
+  };
 }
