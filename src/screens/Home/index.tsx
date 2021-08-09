@@ -1,4 +1,4 @@
-import React, {useState, ReactNode, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../routes/stack.routes';
@@ -25,7 +25,7 @@ import Card from '../../components/Card';
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
-export const Home: ReactNode = ({route}: any) => {
+export const Home: React.FC = ({route}: any) => {
   const navigation = useNavigation<HomeScreenProp>();
 
   const {globalTheme, setGlobalTheme} = useContext(CharacterInformationContext);
