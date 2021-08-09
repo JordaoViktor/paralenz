@@ -67,10 +67,14 @@ export const Home: ReactNode = ({route}: any) => {
     navigation.navigate('CharacterDetail', param);
   }
 
+  function handleThemeSwitch() {
+    setGlobalTheme(!globalTheme);
+  }
+
   return (
     <Container>
       <Header>
-        <HeaderImageWrapper onPress={() => setGlobalTheme(!globalTheme)}>
+        <HeaderImageWrapper onPress={() => handleThemeSwitch()}>
           <HeaderImage source={StarWarsLogo} />
         </HeaderImageWrapper>
 

@@ -12,7 +12,7 @@ const Routes: React.FC = () => {
   const {globalTheme} = useContext(CharacterInformationContext);
 
   return (
-    <ThemeProvider theme={globalTheme ? theme : darkTheme}>
+    <ThemeProvider theme={globalTheme ? darkTheme : theme}>
       <NavigationContainer>
         <StackRoutes />
       </NavigationContainer>
