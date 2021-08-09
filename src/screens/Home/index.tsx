@@ -51,12 +51,12 @@ export const Home: ReactNode = ({route}: any) => {
     const value = filterValues(charactersList.length + cardsPerScroll);
 
     setCharactersList(prevState => [
-      ...prevState.filter((item): boolean => item === charactersList),
+      ...prevState.filter((item: CharactersListDTO) => item === charactersList),
       ...value,
     ]);
   }
 
-  function handleCardPress(param: CharactersDTO[]) {
+  function handleCardPress(param: CharactersDTO | any) {
     navigation.navigate('CharacterDetail', param);
   }
 

@@ -32,7 +32,7 @@ interface Params extends CharactersDTO {
 }
 
 interface ContextProps {
-  setCharacterFullInfo: () => void;
+  setCharacterFullInfo: (userInfo: CharactersHomeWorldDTO) => void;
   characterFullInfo: CharactersDTO;
 }
 
@@ -42,10 +42,11 @@ export const CharacterDetail: React.FC = () => {
   const navigation = useNavigation();
 
   const {data: userInfo} = useFetch<CharactersHomeWorldDTO>(character.url);
-  console.log('blink', userInfo);
+
   const {setCharacterFullInfo, characterFullInfo} = useContext<ContextProps>(
     CharacterInformationContext,
   );
+  const personage = characterFullInfo?.result?.properties;
 
   function SetContext() {
     if (userInfo) {
@@ -60,8 +61,6 @@ export const CharacterDetail: React.FC = () => {
   useEffect(() => {
     SetContext();
   });
-
-  const personage = characterFullInfo?.result?.properties;
 
   return (
     <TouchableWithoutFeedback onPress={() => handlePreviousPage()}>

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {FlatList} from 'react-native';
-import {CharactersDTO} from '../../services/dtos/CharactersDTO';
+import {CharactersListDTO} from '../../services/dtos/CharactersListDTO';
 import LottieView from 'lottie-react-native';
 import BabyYoda from '../../assets/animations/yoda-the-baby.json';
 
@@ -11,7 +11,7 @@ export const Container = styled.View`
 `;
 
 export const CharactersListWrapper = styled(
-  FlatList as new () => FlatList<CharactersDTO[]>,
+  FlatList as new () => FlatList<CharactersListDTO>,
 ).attrs({
   // scrollEventThrottle: 16,
   // contentContainerStyle: {
