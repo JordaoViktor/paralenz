@@ -1,4 +1,4 @@
-import React, {useState, ReactNode} from 'react';
+import React, {useState, ReactNode, useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../routes/stack.routes';
@@ -19,12 +19,17 @@ import {CharactersListDTO} from '../../services/dtos/CharactersListDTO';
 import {CharactersDTO} from '../../services/dtos/CharactersDTO';
 import StarWarsLogo from '../../assets/images/starwars.png';
 
+import {CharacterInformationContext} from '../../context/CharacterInformation';
+
 import Card from '../../components/Card';
 
 type HomeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export const Home: ReactNode = ({route}: any) => {
   const navigation = useNavigation<HomeScreenProp>();
+
+  const {globalTheme, setGlobalTheme} = useContext(CharacterInformationContext);
+
   const paramsList = route.params.results;
 
   const sortedByName = paramsList.sort((a: any, b: any) => {
@@ -51,7 +56,9 @@ export const Home: ReactNode = ({route}: any) => {
     const value = filterValues(charactersList.length + cardsPerScroll);
 
     setCharactersList(prevState => [
-      ...prevState.filter((item: CharactersListDTO) => item === charactersList),
+      ...prevState.filter(
+        item => !charactersList.some(uid => uid.uid === item.uid),
+      ),
       ...value,
     ]);
   }
@@ -63,7 +70,7 @@ export const Home: ReactNode = ({route}: any) => {
   return (
     <Container>
       <Header>
-        <HeaderImageWrapper>
+        <HeaderImageWrapper onPress={() => setGlobalTheme(!globalTheme)}>
           <HeaderImage source={StarWarsLogo} />
         </HeaderImageWrapper>
 

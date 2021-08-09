@@ -28,7 +28,7 @@ export const BadgeWrapper = styled.View`
 `;
 
 export const Badge = styled.View`
-  background-color: ${({theme}) => theme.colors.shape_light};
+  background-color: ${({theme}) => theme.colors.badge_color};
   width: 90%;
   height: 70px;
   border-radius: 20px;
@@ -39,6 +39,7 @@ export const Badge = styled.View`
 export const BadgeText = styled.Text`
   font-size: ${RFValue(30)}px;
   font-weight: bold;
+  color: ${({theme}) => theme.colors.badge_text};
 `;
 
 export const Footer = styled.View`

@@ -1,12 +1,13 @@
 export default {
   colors: {
-    background_primary: '#1b1b1f',
-    primary: '#29292E',
+    background_primary: '#EBEBD3',
+    primary: '#3C3C3B',
     secondary: '#fee918',
     secondary_dark: '#FFD23F',
-    shape_dark: '#000',
-    shape_light: '#FFF',
-    test: '#1e1e1e',
+    shape_dark: '#FaFaFa',
+    shape_light: '#000',
+    badge_color: '#fff',
+    badge_text: '#000',
   },
   fonts: {},
 };

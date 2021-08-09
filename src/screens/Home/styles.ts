@@ -4,6 +4,7 @@ import {FlatList} from 'react-native';
 import {CharactersListDTO} from '../../services/dtos/CharactersListDTO';
 import LottieView from 'lottie-react-native';
 import BabyYoda from '../../assets/animations/yoda-the-baby.json';
+import {BorderlessButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
@@ -12,14 +13,7 @@ export const Container = styled.View`
 
 export const CharactersListWrapper = styled(
   FlatList as new () => FlatList<CharactersListDTO>,
-).attrs({
-  // scrollEventThrottle: 16,
-  // contentContainerStyle: {
-  //   paddingTop: 40,
-  //   paddingBottom: 300,
-  // },
-  // showsVerticalScrollIndicator: false,
-})``;
+).attrs({})``;
 
 export const Header = styled.View`
   width: 100%;
@@ -27,7 +21,7 @@ export const Header = styled.View`
   background-color: ${({theme}) => theme.colors.shape_dark};
 `;
 
-export const HeaderImageWrapper = styled.View`
+export const HeaderImageWrapper = styled(BorderlessButton)`
   margin-top: 50px;
   justify-content: center;
   align-items: center;
@@ -46,7 +40,7 @@ export const HeaderTitleWrapper = styled.View`
 
 export const HeaderTitle = styled.Text`
   font-size: ${RFValue(30)}px;
-  color: white;
+  color: ${({theme}) => theme.colors.shape_light};
   text-transform: uppercase;
   font-weight: bold;
 `;

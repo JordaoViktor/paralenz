@@ -1,20 +1,11 @@
-import React, {
-  createContext,
-  ReactNode,
-  useState,
-  ReactChildren,
-  ReactChild,
-} from 'react';
+import React, {createContext, useState} from 'react';
 
-export const CharacterInformationContext = createContext({} as any);
-interface CharacterInformationProps {
-  children: () => ReactChildren | ReactChild;
-}
-export const CharacterInformation: ReactNode = ({
-  children,
-}: new () => CharacterInformationProps) => {
+const CharacterInformationContext = createContext({} as any);
+
+const CharacterInformation: React.FC = ({children}) => {
   const [characterFullInfo, setCharacterFullInfo] = useState([]);
   const [characterHomeWorld, setCharacterHomeWorld] = useState({});
+  const [globalTheme, setGlobalTheme] = useState(true);
 
   return (
     <CharacterInformationContext.Provider
@@ -23,8 +14,12 @@ export const CharacterInformation: ReactNode = ({
         setCharacterFullInfo,
         characterHomeWorld,
         setCharacterHomeWorld,
+        globalTheme,
+        setGlobalTheme,
       }}>
       {children}
     </CharacterInformationContext.Provider>
   );
 };
+
+export {CharacterInformationContext, CharacterInformation};
